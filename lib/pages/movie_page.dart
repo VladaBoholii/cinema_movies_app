@@ -152,18 +152,16 @@ class _MoviePageState extends State<MoviePage> {
                 //main info
 
                 Expanded(
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: MainInfo(
-                        release_date: DateTime.parse(widget.movie.releaseDate),
-                        originalTitle: widget.movie.originalTitle,
-                        countries: widget.movie.productionCountries,
-                        genres: widget.movie.genres,
-                        titleStyle: titleStyle,
-                        style: main,
-                        runtime: widget.movie.runtime,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: MainInfo(
+                      release_date: DateTime.parse(widget.movie.releaseDate),
+                      originalTitle: widget.movie.originalTitle,
+                      countries: widget.movie.productionCountries,
+                      genres: widget.movie.genres,
+                      titleStyle: titleStyle,
+                      style: main,
+                      runtime: widget.movie.runtime,
                     ),
                   ),
                 )
@@ -201,7 +199,7 @@ class _MoviePageState extends State<MoviePage> {
             //genres
 
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 8),
+              padding: const EdgeInsets.fromLTRB(8,8,8,0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
