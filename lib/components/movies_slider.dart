@@ -18,11 +18,29 @@ class _MoviesSliderState extends State<MoviesSlider> {
       unlimitedMode: true,
       scrollDirection: Axis.horizontal,
       itemCount: widget.moviesList.length,
+      viewportFraction: 0.9,
       slideBuilder: (index) {
         final movie = widget.moviesList[index];
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Center(child: MovieTile(movie: movie)),
+          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Column(
+                  children: [
+                    MovieTile(movie: movie),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(movie.title,
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.purple[600],
+                              fontStyle: FontStyle.italic)),
+                    )
+                  ],
+                ),
+              )),
         );
       },
     );
