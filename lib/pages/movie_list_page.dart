@@ -31,6 +31,7 @@ class MovieListPageState extends State<MovieListPage> {
     _fetchMovieList();
   }
 
+  //get movies list
   void _fetchMovieList() async {
     final nowPlayingMoviesList = await nowPlayingApi.getMovies();
     setState(() {
@@ -62,6 +63,7 @@ class MovieListPageState extends State<MovieListPage> {
           if (snapshot.connectionState == ConnectionState.done) {
             List<Movie> nowPlayingMovies = snapshot.data ?? [];
 
+            //EMPTY list
             if (nowPlayingMovies.isEmpty) {
               return Center(
                 child: Text(
@@ -74,15 +76,18 @@ class MovieListPageState extends State<MovieListPage> {
                 ),
               );
             }
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: MoviesSlider(moviesList: nowPlayingMovies),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
+
+            //list NOT EMPTY
             return Center(
-              child: Text('No movies for ${country.name}'),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: MoviesSlider(moviesList: nowPlayingMovies),
+              ),
             );
-          } else {
+          } 
+
+          //loading data
+          else {
             return Center(
               child: CircularProgressIndicator(
                 color: Colors.purple[300],
@@ -91,7 +96,6 @@ class MovieListPageState extends State<MovieListPage> {
           }
         },
       ),
-      backgroundColor: Colors.purple.shade100,
     );
   }
 }
