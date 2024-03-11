@@ -23,10 +23,11 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    countryBox.clear();
+    //countryBox.clear();
     initCountry();
   }
 
+  //get countries list
   Future<void> initCountry() async {
     final SCountryService countryService = SCountryService();
     final countries = await countryService.getCountries();
@@ -39,6 +40,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  //biuld dropdown items list
   List<DropdownMenuItem<SCountry>> buildDropdownItems() {
     List<DropdownMenuItem<SCountry>> dropdownItems = [];
     for (SCountry country in countryList) {
@@ -59,13 +61,13 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      HomePage(
-        country: selected,
-      ),
+      HomePage(country: selected),
       FavoritePage(country: selected),
     ];
 
     return Scaffold(
+
+      //appbar
       appBar: AppBar(
         title: Center(
           child: Text(
@@ -73,7 +75,11 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
+
+      //toggle pages
       body: pages[currentIndex],
+
+      //bottom nav bar
       bottomNavigationBar: Container(
         height: 100,
         color: Colors.purple[300],
