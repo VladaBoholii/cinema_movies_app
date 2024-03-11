@@ -30,14 +30,11 @@ class FavoritePageState extends State<FavoritePage> {
 
     if (widget.country != oldWidget.country) {
       country = widget.country;
-      _updateMovies();
+      setState(() {});
     }
   }
 
-  Future<void> _updateMovies() async {
-    setState(() {});
-  }
-
+  //get movie list
   Future<List<Movie>> _fetchMovies(List<String> movieIds) async {
     final MovieApi movieApi =
         MovieApi(type: '', region: '', language: country.language);
@@ -55,15 +52,30 @@ class FavoritePageState extends State<FavoritePage> {
             favoriteList.add('$element');
           }
 
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FutureBuilder<List<Movie>>(
-              future: _fetchMovies(favoriteList),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  List<Movie> favoriteMoviesList = snapshot.data ?? [];
+          return FutureBuilder<List<Movie>>(
+            future: _fetchMovies(favoriteList),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                List<Movie> favoriteMoviesList = snapshot.data ?? [];
 
-                  return GridView.builder(
+                            //EMPTY list
+            if (favoriteMoviesList.isEmpty) {
+              return Center(
+                child: Text(
+                  'No Favorite Movies',
+                  style: TextStyle(
+                    color: Colors.purple[300],
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              );
+            }
+          
+                //movies grid
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(8,8,8,0),
+                  child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: 2 / 3,
@@ -76,20 +88,22 @@ class FavoritePageState extends State<FavoritePage> {
                       final movie = favoriteMoviesList[index];
                       return MovieTile(movie: movie);
                     },
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.purple[300],
-                    ),
-                  );
-                }
-              },
-            ),
+                  ),
+                );
+              } 
+              
+              //loading data
+              else {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.purple[300],
+                  ),
+                );
+              }
+            },
           );
         },
       ),
-      backgroundColor: Colors.purple.shade100,
     );
   }
 }
