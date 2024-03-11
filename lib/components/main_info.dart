@@ -23,7 +23,7 @@ class MainInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat format = new DateFormat('dd.MM.yyyy');
+    final DateFormat format = DateFormat('dd.MM.yyyy');
 
     return Padding(
         padding: const EdgeInsets.only(right: 8.0),
