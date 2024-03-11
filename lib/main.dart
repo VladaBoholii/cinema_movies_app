@@ -18,8 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      
+      //theme
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.purple.shade100,
+
+        //scaffold
+        scaffoldBackgroundColor: Colors.grey[250],
+
+        //tabbar
         tabBarTheme: const TabBarTheme(
           indicatorColor: Colors.purple,
           indicatorSize: TabBarIndicatorSize.tab,
@@ -28,9 +34,13 @@ class MyApp extends StatelessWidget {
           unselectedLabelStyle: TextStyle(
               color: Colors.white38, fontSize: 14, fontWeight: FontWeight.w500),
         ),
+
+        //bottom nav bar
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.purple.shade300,
         ),
+
+        //appbar
         appBarTheme: AppBarTheme(
             backgroundColor: Colors.purple[300],
             titleTextStyle: const TextStyle(
@@ -38,6 +48,8 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: Colors.white)),
       ),
+
+      //home 
       home: const MainPage(),
     );
   }
